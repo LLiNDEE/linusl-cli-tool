@@ -5,12 +5,12 @@ Updated version of CLI-TOOL-CONFIG
 ## --- IF INSTALLED GLOBALLY --- 
 When you've installed it globally you will be able to type ```LinusConfig``` and ```LinusConfig-create```.
 
-######LinusConfig
+### LinusConfig
 When you type **LinusConfig** in your terminal a menu will show up. You will be able to choose between different templates. By default there will be two templates *Express* and *Static-website*.
 The *Express* template will generate some files to get you started with your *express-app*. 
 The *Static-website* template will generate three different files. One **HTML**, **CSS** and **JavaScript**.
 
-######LinusConfig-create
+### LinusConfig-create
 When you type ```LinusConfig-create``` in your terminal a menu will show up with three different alternatives.
   - Add new template
   - Edit existing template
