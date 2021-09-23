@@ -77,14 +77,38 @@ async function createTemplate_addFiles(templateName, _filename = ""){
            return await addFile_question(templateName);
         }
 
-        if(await checkFileExistInTemplate(templateName, await _filename)){
-            fileExist_options(templateName, await _filename);
+        let fixed_filename;
+
+        if(_filename !== path.basename(_filename)){
+            let filepath_arr = _filename.split("\\");
+            let filename_from_path = filepath_arr.length;
+            fixed_filename = filepath_arr[filename_from_path-1];
+        }else{
+            fixed_filename = _filename;
+        }
+
+         if(await checkFileExistInTemplate(templateName, await fixed_filename)){
+             fileExist_options(templateName, await fixed_filename);
+             return;
+         };
+
+
+        if(_filename !== path.basename(_filename)){
+              let content = new Promise((resolve, reject) =>{
+                fs.readFile(`${_filename}`, {encoding: "utf8", flags: "r"}, (err, data) => {
+                    if(err) return reject(err);
+                    resolve(data);
+                });
+              })
+               let pathDir = path.resolve(__dirname,`./templates/${templateName}/${fixed_filename}`);
+                fs.writeFileSync(pathDir, await content,  {encoding: "utf8", flags: "r"});
+                controlQuestion(templateName);
             return;
-        };
+        }
         
-        let content = fs.readFileSync(`${process.cwd()}/${await _filename}`, {encoding: "utf8", flags: "r"});
-        let pathDir = path.resolve(__dirname,`./templates/${templateName}/${_filename}`);
-        fs.writeFileSync(pathDir, content,  {encoding: "utf8", flags: "r"});
+          let content = fs.readFileSync(`${process.cwd()}/${await _filename}`, {encoding: "utf8", flags: "r"});
+          let pathDir = path.resolve(__dirname,`./templates/${templateName}/${_filename}`);
+          fs.writeFileSync(pathDir, content,  {encoding: "utf8", flags: "r"});
 
         controlQuestion(templateName);
 
@@ -118,7 +142,7 @@ async function addFile_question(templateName){
             const file = await inquirer.prompt({
                 type:'input',
                 name:'filename',
-                message: 'Enter the filename or path of the file you want to add\nMUST include file extension! >',
+                message: 'Enter the filename or path of the file you want to add\nYou MUST include the file extension! >',
                 validate: checkIfFileExist
             }).then((answer)=>{
                 resolve(answer.filename);
@@ -136,7 +160,7 @@ async function checkTemplateName(input){
     try{
 
         let allDirectories = new Promise((resolve, reject)=>{
-            fs.readdir(`${process.cwd()}/bin/templates`, (err, folders)=>{
+            fs.readdir(path.resolve(__dirname,`./templates`), (err, folders)=>{
                 if(err) return reject(err);
 
                 return resolve(folders);
@@ -174,11 +198,23 @@ async function createTemplateFolder(templateName){
 
 async function checkIfFileExist(input){
 
-    if(!fs.existsSync(`${input}`)){
-        return 'File does not exist!';
+     if(input !== path.basename(input)){
+         console.log("INSIDE 202");
+         let filepath_arr = input.split("\\");
+         let filename_from_path = filepath_arr.length;
+         console.log(filepath_arr[filename_from_path-1]);
+         let complete_file = filepath_arr[filename_from_path-1];
+         if(!complete_file.includes(".")){
+             return 'File does not exist!'
+         }
+        return true;
+     }
+
+    if(fs.existsSync(`${input}`)){ // Hittar filen med sökväg. 
+        return true;
     }
 
-    if(!fs.existsSync(`${process.cwd()}/${input}`)){
+    if(!fs.existsSync(`${process.cwd()}/${input}`)){ // HITTAR INTE FIL MED SÖKVÄG
         return 'File does not exist!';
     }
 
@@ -190,7 +226,7 @@ async function checkFileExistInTemplate(template, file){
     try{
 
         let status = false;
-        if(fs.existsSync(`${process.cwd()}/bin/templates/${template}/${await file}`)){
+        if(fs.existsSync(path.resolve(__dirname,`./templates/${template}/${await file}`))){
             status = true;
         }
         return status;
@@ -206,7 +242,7 @@ async function fileExist_options(templateName, filename){
         await inquirer.prompt({
             type:'list',
             name: 'file_options',
-            message: `A file named ${filename} already exists in ${templateName}.\n What do you want to do?`,
+            message: `A file named '${filename}' already exists in '${templateName}'.\n What do you want to do?`,
             choices: ['Change name', 'Overwrite', 'Skip'],
             default: 'Skip'
         }).then(async(answer) => {
@@ -225,13 +261,14 @@ async function fileExist_options(templateName, filename){
                 await inquirer.prompt({
                     type: 'input',
                     name: 'new_name',
-                    message: `Input a new name for ${filename}\n MUST include file extension!`,
+                    message: `Input a new name for '${filename}'\n You MUST include the file extension!`,
                     validate: checkInput
                 }).then(async(answer) => {
                     answer.new_name = answer.new_name.trim();
                     let content = fs.readFileSync(`${process.cwd()}/${await filename}`, {encoding: "utf8", flags: "r"});
                     let pathDir = path.resolve(__dirname,`./templates/${templateName}/${answer.new_name}`);
                     fs.writeFileSync(pathDir, content,  {encoding: "utf8", flags: "r"});
+                    controlQuestion(templateName);
                     return;
                 })
             }
@@ -319,8 +356,8 @@ async function editTemplate_addFile(template){
         await inquirer.prompt({
             type: 'input',
             name: 'filename',
-            message: 'Input the name of the file you want to add >',
-            validate: checkInput
+            message: 'Enter the filename or path of the file you want to add\nYou MUST include the file extension! >',
+            validate: checkIfFileExist
         }).then((answer) => {
             createTemplate_addFiles(template, answer.filename);
             return;
@@ -460,7 +497,7 @@ async function newTempNameChecker(input){
     try{
 
         let allDirectories = new Promise((resolve, reject)=>{
-            fs.readdir(`${process.cwd()}/bin/templates`, (err, folders)=>{
+            fs.readdir(path.resolve(__dirname,`/templates`), (err, folders)=>{
                 if(err) return reject(err);
 
                 return resolve(folders);

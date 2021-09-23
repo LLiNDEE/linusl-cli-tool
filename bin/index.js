@@ -39,7 +39,7 @@ starting_question();
 async function generateTemplates(template){
 
     let allFiles = new Promise((resolve, reject) => {
-        fs.readdir(`${process.cwd()}/bin/templates/${template}`, (err, files)=>{
+        fs.readdir(path.resolve(__dirname,`./templates/${template}`), (err, files)=>{
             if(err) return reject(err);
 
             resolve(files);
@@ -62,7 +62,7 @@ async function generateTemplates(template){
 function checkTemplatesHandler(){
     try{
 
-        return (fs.readdirSync(`${process.cwd()}/bin/templates`,(err, files)=>{
+        return (fs.readdirSync(path.resolve(__dirname,`./templates`),(err, files)=>{
             if(err) return console.log(err);
 
             return files;
@@ -131,14 +131,14 @@ async function namesLoop(file, template){
     await inquirer.prompt({
         type: "list",
         name: "file_options",
-        message: `A file named ${file.org_name} does already exist.`,
+        message: `A file named '${file.org_name}' already exist.\n What do you want to do?`,
         choices: ['Change name', 'Overwrite', 'Skip']
     }).then(async(answer)=>{
         if(answer.file_options == 'Change name'){
             await inquirer.prompt({
                 type: 'input',
                 name: 'new_name',
-                message: `Input a new name for ${file.org_name}:`,
+                message: `Input a new name for '${file.org_name}' (Without file extension!):`,
                 validate: checkNameInput
             }).then((answer)=>{
                 let getFileType = file.org_name.split('.');
@@ -203,7 +203,7 @@ async function generateChangedFiles(files, template){
 
 async function getAllFiles(template){
     let allFiles = new Promise((resolve, reject) => {
-        fs.readdir(`${process.cwd()}/bin/templates/${template}`, (err, files)=>{
+        fs.readdir(path.resolve(__dirname,`./templates/${template}`), (err, files)=>{
             if(err) return reject(err);
 
             resolve(files);
