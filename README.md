@@ -2,7 +2,7 @@
 Updated version of CLI-TOOL-CONFIG
 
 
-##--- IF INSTALLED GLOBALLY -- 
+## --- IF INSTALLED GLOBALLY --- 
 When you've installed it globally you will be able to type ```LinusConfig``` and ```LinusConfig-create```.
 
 ######LinusConfig
@@ -22,11 +22,14 @@ When you're done adding files. The new template will now appear in the template 
 
 *Edit existing template*
 If you choose this option you have to pick one of the templates that you have available.
-![Image of menu](https://gyazo.com/be66c4d4c9f026edf1ed6de16eb6b16f)
+![linusconfig-editTemplate](https://user-images.githubusercontent.com/64322505/134517331-69529846-86d6-4779-99b7-29e36ea2fabf.png)
+
 
 After you've picked a template.
 You'll get the following options:
-![Image of menu](https://gyazo.com/6ccaeeb27ee4f0222ac3ce8e265f9d89)
+
+![linusconfig-editOptions](https://user-images.githubusercontent.com/64322505/134517349-9e5d114a-a719-4887-83a9-b5804df89769.png)
+
 
 *Add file*
 You'll be able to add file(s) to the selected template. *(The file(s) needs to be in the same folder you run the command in. Since using the path does **NOT** work for now.)*
