@@ -22,7 +22,7 @@ After you've chosen a name, you will be asked to add files to your new template.
 When you're done adding files. The new template will now appear in the template menu when you type ```LinusConfig```.
 
 ## Edit existing template` <br/>
-If you choose this option you have to pick one of the templates that you have available.
+If you choose this option you have to pick one of the templates that you have available. <br/>
 ![linusconfig-editTemplate](https://user-images.githubusercontent.com/64322505/134517331-69529846-86d6-4779-99b7-29e36ea2fabf.png)
 
 
