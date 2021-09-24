@@ -1,7 +1,5 @@
 module.exports = { getFolderPathHandler }
 
-// TEST PATH DURING DEVELOPMENT --> C:\Users\linus\Desktop
-
 const inquirer = require('inquirer');
 const fs = require('fs');
 const process = require("process");
@@ -16,7 +14,6 @@ async function getFolderPathHandler(){
             validate: checkIf_folderExist
         }).then((answer) => {
             createTemplateName(answer.folderPath);
-            //getFilesFromFolder(answer.folderPath);
         })
     }catch(error){
         console.log(error);
@@ -138,9 +135,7 @@ async function checkInput(input){
 
 async function generateFilesInsideTemplate(selected_files, templateName, folderpath){
     try{
-        console.log("Selected files --> " + selected_files);
         for(let file of selected_files){
-            console.log(file);
             let content = new Promise((resolve, reject) => {
                 fs.readFile(`${folderpath}\\${file}`,{encoding: "utf8", flags: "r"}, (err, data)=>{
                     if(err) reject(err);
@@ -148,8 +143,6 @@ async function generateFilesInsideTemplate(selected_files, templateName, folderp
                     resolve(data);
                 });
             });
-            // // let pathDir = ;
-            console.log("DATA --> " + await content);
              fs.writeFile(path.resolve(__dirname,`../templates/${templateName}/${file}`), await content, (err)=>{
                  if(err) return console.log("Failed adding file to template...");
              });
@@ -165,7 +158,6 @@ async function generateFilesInsideTemplate(selected_files, templateName, folderp
 
 async function createTemplate(templateName){
     try{
-        console.log("FOLDERNAME --> " + templateName);
         let tempPath = path.resolve(__dirname,`../templates/${templateName}`);
         fs.mkdir(tempPath,{ recursive: true }, (err) =>{
             if(err) return console.log(err);
