@@ -3,22 +3,22 @@ Updated version of CLI-TOOL-CONFIG
 
 
 ## --- IF INSTALLED GLOBALLY --- 
-When you've installed it globally you will be able to type ```LinusConfig``` and ```LinusConfig-create```.
+When you've installed it globally you will be able to type ```LinusConfig``` and ```LinusConfig-extra```.
 
 ### LinusConfig
-When you type **LinusConfig** in your terminal a menu will show up. You will be able to choose between different templates. By default there will be two templates *Express* and *Static-website*.
+When you type **LinusConfig** in your terminal a menu will show up. You will be able to choose between different templates. By default there will be two templates *Express* and *HTML-CSS-JS*.
 The *Express* template will generate some files to get you started with your *express-app*. 
-The *Static-website* template will generate three different files. One **HTML**, **CSS** and **JavaScript**.
+The *HTML-CSS-JS* template will generate three different files. One **HTML**, **CSS** and **JavaScript**.
 
-### LinusConfig-create
-When you type ```LinusConfig-create``` in your terminal a menu will show up with three different alternatives.
+### LinusConfig-extra
+When you type ```LinusConfig-extra``` in your terminal a menu will show up with three different options.
   - Add new template
   - Edit existing template
   - Delete a template
  
 ## Add new template <br/>
 This option will make it possible for you to create your own template. You will be asked for a name for the new template *(if you don't pick a name, a name will be generated for you)*.
-After you've chosen a name, you will be asked to add files to your new template. The file(s) needs to be in the same folder you run the command in *(using the path of the file does **NOT** work at the moment.)*.
+After you've chosen a name, you will be asked to add files to your new template. The file(s) have to be in the same folder you run the command in *(If you use the path you don't need the files to be in the same folder you run the command in)*.
 When you're done adding files. The new template will now appear in the template menu when you type ```LinusConfig```.
 
 ## Edit existing template` <br/>
@@ -33,7 +33,7 @@ You'll get the following options:
 
 
 `Add file`\
-This option will make it possible to add file(s) to the selected template. *(The file(s) needs to be in the same folder you run the command in. Since using the path does **NOT** work for now.)* <br/> If you add a file to a template where a file with that name already exists, you'll get the following menu\
+This option will make it possible to add file(s) to the selected template. *(The file(s) needs to be in the same folder you run the command in. If you use the path you don't need the files to be in the same folder you run the command in)* <br/> If you add a file to a template where a file with that name already exists, you'll get the following menu\
 ![linusconfig-sameFilename](https://user-images.githubusercontent.com/64322505/134518998-1e7cbead-74bf-44e5-9603-30fb4ef1ac50.png)
 
   - Change name, this option will change the name of the uploaded file and not affect any other file in that template.
@@ -53,3 +53,5 @@ This option will make it possible to pick a new name for the selected template.
 
 ## Delete a template
 This option will show you a list of templates available. After you've selected a template it will remove the template and **ALL** files inside.
+
+
