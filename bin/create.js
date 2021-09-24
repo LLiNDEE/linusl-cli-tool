@@ -100,9 +100,10 @@ async function createTemplate_addFiles(templateName, _filename = ""){
                     resolve(data);
                 });
               })
-               let pathDir = path.resolve(__dirname,`./templates/${templateName}/${fixed_filename}`);
-                fs.writeFileSync(pathDir, await content,  {encoding: "utf8", flags: "r"});
-                controlQuestion(templateName);
+             
+                let pathDir = path.resolve(__dirname,`./templates/${templateName}/${fixed_filename}`);
+                 fs.writeFileSync(pathDir, await content,  {encoding: "utf8", flags: "r"});
+                 controlQuestion(templateName);
             return;
         }
         
@@ -199,10 +200,8 @@ async function createTemplateFolder(templateName){
 async function checkIfFileExist(input){
 
      if(input !== path.basename(input)){
-         console.log("INSIDE 202");
          let filepath_arr = input.split("\\");
          let filename_from_path = filepath_arr.length;
-         console.log(filepath_arr[filename_from_path-1]);
          let complete_file = filepath_arr[filename_from_path-1];
          if(!complete_file.includes(".")){
              return 'File does not exist!'
