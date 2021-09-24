@@ -52,4 +52,8 @@ This option will make it possible to pick a new name for the selected template.
 *(It will not affect the files inside the template)*
 
 ## Delete a template
+<<<<<<< HEAD
 This option will show you a list of templates available. After you've selected a template it will remove the template and **ALL** files inside.
+=======
+This option will show you a list of templates available. After you've selected a template it will remove the template and **ALL** files inside.
+>>>>>>> 74078daf246866863b671be6bb12d159e1528562
