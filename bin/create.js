@@ -208,7 +208,7 @@ async function checkIfFileExist(input){
         return true;
      }
 
-    if(fs.existsSync(`${input}`)){ 
+    if(fs.existsSync(`${input}`)){
         return true;
     }
 
