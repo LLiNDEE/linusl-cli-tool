@@ -1,5 +1,5 @@
-# CLI-TOOL-LinusConfig2.0
-Updated version of CLI-TOOL-CONFIG
+# linusl-cli-tool 2.0
+Updated version of linusl-cli-tool
 
 
 ## --- IF INSTALLED GLOBALLY --- 

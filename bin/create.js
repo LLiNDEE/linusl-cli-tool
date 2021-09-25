@@ -496,7 +496,7 @@ async function newTempNameChecker(input){
     try{
 
         let allDirectories = new Promise((resolve, reject)=>{
-            fs.readdir(path.resolve(__dirname,`/templates`), (err, folders)=>{
+            fs.readdir(path.resolve(__dirname,`./templates`), (err, folders)=>{
                 if(err) return reject(err);
 
                 return resolve(folders);
