@@ -98,7 +98,7 @@ async function showFilesInsideFolder(files, templateName, folderpath){
         await inquirer.prompt({
             type: 'checkbox',
             name: 'selected_files',
-            message: `Select which files you want to import into '${templateName}'`,
+            message: `Select which files you want to import into the new template '${templateName}'`,
             choices: files
         }).then((answer) => {
             return generateFilesInsideTemplate(answer.selected_files, templateName, folderpath);
