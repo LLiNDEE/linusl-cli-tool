@@ -61,7 +61,6 @@ async function createTemplateName(){
             createTemplate_addFiles(template_name);
         });
 
-        // KOPPLA PÅ SENARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          createTemplateFolder(template_name); 
         
 
@@ -209,11 +208,11 @@ async function checkIfFileExist(input){
         return true;
      }
 
-    if(fs.existsSync(`${input}`)){ // Hittar filen med sökväg. 
+    if(fs.existsSync(`${input}`)){ 
         return true;
     }
 
-    if(!fs.existsSync(`${process.cwd()}/${input}`)){ // HITTAR INTE FIL MED SÖKVÄG
+    if(!fs.existsSync(`${process.cwd()}/${input}`)){ 
         return 'File does not exist!';
     }
 
