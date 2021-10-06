@@ -14,7 +14,7 @@ async function starting_question(){
             type:'list',
             name:'action',
             message: 'What do you want to do?',
-            choices: ['Add new template file by file', 'Edit existing template', 'Add new template by importing folder' ,'Delete a template']
+            choices: ['Add new template file by file', 'Add new template by importing folder', 'Edit existing template', 'Delete a template']
         },
         {
             type: 'confirm',

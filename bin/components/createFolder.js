@@ -65,7 +65,7 @@ async function checkIf_folderExist(folderpath){
             })
         });
 
-        if(!await folder){ // If path is not a folder. This will happen.
+        if(!await folder){ 
             return 'Invalid path!'
         }
 
@@ -139,7 +139,6 @@ async function generateFilesInsideTemplate(selected_files, templateName, folderp
             let content = new Promise((resolve, reject) => {
                 fs.readFile(`${folderpath}\\${file}`,{encoding: "utf8", flags: "r"}, (err, data)=>{
                     if(err) reject(err);
-                    console.log(data);
                     resolve(data);
                 });
             });
