@@ -91,6 +91,11 @@ async function createTemplate_addFiles(templateName, _filename = ""){
             fixed_filename = _filename;
         }
 
+        if(await checkFileExistInTemplate(templateName, await fixed_filename) && _filename !== path.basename(_filename)){
+            fileExist_options(templateName, await fixed_filename, _filename);
+            return;
+        }
+
          if(await checkFileExistInTemplate(templateName, await fixed_filename)){
              fileExist_options(templateName, await fixed_filename);
              return;
@@ -239,7 +244,7 @@ async function checkFileExistInTemplate(template, file){
     }
 }
 
-async function fileExist_options(templateName, filename){
+async function fileExist_options(templateName, filename, filenamePATH = ""){
     try{
 
         await inquirer.prompt({
@@ -267,7 +272,31 @@ async function fileExist_options(templateName, filename){
                     message: `Input a new name for '${filename}'\n You MUST include the file extension!`,
                     validate: checkInput
                 }).then(async(answer) => {
+                        
+
+                    let fixed_filename;
+                    if(filenamePATH !== path.basename(filenamePATH)){
+                        let filepath_arr = answer.new_name.split("\\");
+                        let filename_from_path = filepath_arr.length;
+                        fixed_filename = filepath_arr[filename_from_path-1];
+                    }
+
+                    if(filenamePATH !== path.basename(filenamePATH)){
+                        let content = new Promise((resolve, reject) =>{
+                          fs.readFile(`${filenamePATH}`, {encoding: "utf8", flags: "r"}, (err, data) => {
+                              if(err) return reject(err);
+                              resolve(data);
+                          });
+                        })
+
+                          let pathDir = path.resolve(__dirname,`./templates/${templateName}/${fixed_filename}`);
+                           fs.writeFileSync(pathDir, await content,  {encoding: "utf8", flags: "r"});
+                           controlQuestion(templateName);
+                      return;
+                  }
+
                     answer.new_name = answer.new_name.trim();
+
                     let content = fs.readFileSync(`${process.cwd()}/${await filename}`, {encoding: "utf8", flags: "r"});
                     let pathDir = path.resolve(__dirname,`./templates/${templateName}/${answer.new_name}`);
                     fs.writeFileSync(pathDir, content,  {encoding: "utf8", flags: "r"});
@@ -375,20 +404,6 @@ async function editTemplate_deleteFile(template){
     try{
 
         let allFiles = await getAllFilesInTemplate(template);
-        if(allFiles.length == 0){
-            await inquirer.prompt({
-                type: 'confirm',
-                name: 'confirmQ',
-                message:`No files inside '${template}', do you want to go back?`,
-                default: true
-            }).then((answer) => {
-                if(answer.confirmQ){
-                    editTemplateHandler();
-                    return;
-                }
-                console.log("Goodbye!");
-            })
-        }
 
         if(allFiles.length == 0){
             await inquirer.prompt({
