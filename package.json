@@ -1,6 +1,7 @@
 {
-  "name": "cli-tool2.0",
-  "version": "1.0.0",
+  "name": "linusl-cli-tool",
+  "keywords": ["cli", "template", "templates", "terminal"],
+  "version": "2.0.0",
   "description": "",
   "main": "./bin/index.js",
   "bin": {
@@ -8,7 +9,9 @@
     "LinusConfig-extra": "./bin/create.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "create": "node ./bin/create.js",
+    "menu": "node ./bin/index.js"
   },
   "author": "",
   "license": "ISC",
