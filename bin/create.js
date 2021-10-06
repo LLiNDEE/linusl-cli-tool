@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const process = require("process");
 const path = require("path");
+const { getFolderPathHandler } = require('./components/createFolder');
 
 async function starting_question(){
     try{
@@ -13,7 +14,7 @@ async function starting_question(){
             type:'list',
             name:'action',
             message: 'What do you want to do?',
-            choices: ['Add new template', 'Edit existing template', 'Delete a template']
+            choices: ['Add new template file by file', 'Add new template by importing folder', 'Edit existing template', 'Delete a template']
         },
         {
             type: 'confirm',
@@ -24,7 +25,7 @@ async function starting_question(){
     ]).then((answer) => {
             if(!answer.answer) return console.log("Okay bye!!!!!!");
 
-            if(answer.action == "Add new template"){
+            if(answer.action == "Add new template file by file"){
                 return createTemplateName();
             }
 
@@ -34,6 +35,10 @@ async function starting_question(){
 
             if(answer.action == "Delete a template"){
                 return deleteTemplateHandler();
+            }
+
+            if(answer.action == "Add new template by importing folder"){
+                return getFolderPathHandler();
             }
 
         })
