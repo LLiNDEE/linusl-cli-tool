@@ -48,11 +48,11 @@ async function generateTemplates(template){
 
     let checkFiles = checkFilesExist(await allFiles);
 
-    if((await checkFiles).length == 0){ // Om det inte finns någon fil med samma namn.
+    if((await checkFiles).length == 0){ 
         return generateFiles(template, await allFiles);
     }
 
-    if((await checkFiles).length !== 0){ // Om det finns en/flera filer med samma namn.
+    if((await checkFiles).length !== 0){ 
         return fixDuplicatedFileNames(await checkFiles, template);
         
     }
@@ -146,12 +146,10 @@ async function namesLoop(file, template){
                 let newName = `${answer.new_name}.${getFileType[1]}`;
 
                 file.new_name = newName.trim();
-                // newArr.push(file);
                 newFile = file;
             });
         }else if(answer.file_options == 'Overwrite'){
             file.overwrite = true;
-            // newArr.push(file);
             newFile = file
         }else if(answer.file_options == 'Skip'){
             file.skip = true;
