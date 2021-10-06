@@ -390,6 +390,22 @@ async function editTemplate_deleteFile(template){
             })
         }
 
+        if(allFiles.length == 0){
+            await inquirer.prompt({
+                type: 'confirm',
+                name: 'confirmQ',
+                message:`No files inside '${template}', do you want to go back?`,
+                default: true
+            }).then((answer) => {
+                if(answer.confirmQ){
+                    editTemplateHandler();
+                    return;
+                }
+                return console.log("Goodbye FEATURE!");
+            });
+            return;
+        }
+
         await inquirer.prompt({
             type: 'list',
             name: 'file_list',
